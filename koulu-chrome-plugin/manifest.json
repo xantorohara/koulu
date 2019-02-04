@@ -1,0 +1,23 @@
+{
+  "name": "Koulu",
+  "version": "1.0",
+  "description": "Cookie tracker",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "alarms",
+    "cookies",
+    "storage",
+    "contextMenus",
+    "*://*.somedomain.com/",
+    "*://localhost:*/"
+  ],
+  "browser_action": {
+    "default_icon": "icon32.png"
+  }
+}
