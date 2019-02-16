@@ -1,14 +1,15 @@
 # Koulu - Google Chrome cookie tracker extension
 
 In some cases it is necessary to copy cookies from one domain to another on scheduled basis.
-For example, for development or testing purposes
-This extension does it.
+
+For example, for development or testing purposes.
+
 
 ## Installation
 
 You can download this extension and install it into the Chrome via "Extensions -> Load unpacked".
-After that it will be available in the navigation bar.
-Like this:
+
+After that it will be available in the navigation bar. Like this:
 
 ![Screenshot](screenshot.png)
 
@@ -20,32 +21,32 @@ You need to set some configuration variables here.
 
 Sample config contains these lines:
 ```js
-const CFG_COPY_TO_DOMAIN = 'localhost';
-const CFG_TRACKED_COOKIES = ['JSESSIONID', 'XSRF-TOKEN'];
-const CFG_TRACKED_DOMAINS = [
+const OPT_COPY_TO_DOMAIN = 'localhost';
+const OPT_TRACKED_COOKIES = ['JSESSIONID', 'XSRF-TOKEN'];
+const OPT_TRACKED_DOMAINS = [
     'dev.somedomain.com',
     'test.somedomain.com',
     'pre.somedomain.com',
     'somedomain.com'
 ];
 
-const CFG_TRACKED_PING_URL = 'https://${DOMAIN}/api/ping';
+const OPT_TRACKED_PING_URL = 'https://${DOMAIN}/api/ping';
 ```
 
-And imagine that you have selected *dev.somedomain.com* in the menu.
-It means that *JSESSIONID* and *XSRF-TOKEN* cookies 
-periodically (every minute) 
-will be copied from the *dev.somedomain.com* to the *localhost*.
+Imagine that you have selected __dev.somedomain.com__ in the menu.
+
+It means that __dev.somedomain.com__ will be pinged and __JSESSIONID__ and __XSRF-TOKEN__ cookies 
+periodically (every minute) will be copied from the __dev.somedomain.com__ to the __localhost__.
 
 ### Config options
-- `CFG_COPY_TO_DOMAIN` - The domain to write cookies to.
-- `CFG_TRACKED_DOMAINS` - List of domains to read cookies from. 
-Menu items are based on this list, and only one domain at a time can be selected.
-- `CFG_TRACKED_COOKIES` - List of cookie names to copy.
-- `CFG_TRACKED_PING_URL` - In some cases it is necessary sometimes to ping the server from where you are reading cookies 
+- `OPT_COPY_TO_DOMAIN` - The domain to write cookies to.
+- `OPT_TRACKED_DOMAINS` - List of domains to read cookies from. 
+- `OPT_TRACKED_COOKIES` - List of cookie names to copy.
+- `OPT_TRACKED_PING_URL` - In some cases it is necessary sometimes to ping the server from where you are reading cookies 
 (to prolong user session, to health-check/heart-beat, or just to refresh cookies).
 You can specify the URL in this variable. Set it to `null` if you don't need to do such pings.
 
+You can select only one domain in a time in the menu. Or select **None** to disable extension activity.
 
 ## Permissions
 
