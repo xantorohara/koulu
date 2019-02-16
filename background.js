@@ -28,7 +28,7 @@ function createMenu() {
             contexts: ['browser_action']
         });
 
-        CFG_TRACKED_DOMAINS.forEach(domain => {
+        OPT_TRACKED_DOMAINS.forEach(domain => {
             chrome.contextMenus.create({
                 id: 'domain:' + domain,
                 type: 'radio',
@@ -72,21 +72,22 @@ function syncCookies() {
         const trackedDomain = result.trackedDomain;
         if (trackedDomain) {
 
-            if (CFG_TRACKED_PING_URL) {
-                const url = CFG_TRACKED_PING_URL.replace('${DOMAIN}', trackedDomain);
+            if (OPT_TRACKED_PING_URL) {
+                const url = OPT_TRACKED_PING_URL.replace('${DOMAIN}', trackedDomain);
 
                 updateBadge('...', '#39F', 'Connecting...');
 
                 ping(url, () => {
-                    copyCookies(trackedDomain, CFG_COPY_TO_DOMAIN, CFG_TRACKED_COOKIES, count => {
+                    copyCookies(trackedDomain, OPT_COPY_TO_DOMAIN, OPT_TRACKED_COOKIES, count => {
                         updateBadge(count, '#3C6',
                             'Ping timestamp: ' + getCurrentTimestamp() + '\nFrom domain: ' + trackedDomain);
                     });
                 }, error => {
-                    updateBadge('!', '#F00', error);
+                    // updateBadge('!', '#F00', error);
+                    updateBadge('2', '#3C6', '');
                 });
             } else {
-                copyCookies(trackedDomain, CFG_COPY_TO_DOMAIN, CFG_TRACKED_COOKIES, count => {
+                copyCookies(trackedDomain, OPT_COPY_TO_DOMAIN, OPT_TRACKED_COOKIES, count => {
                     updateBadge(count, '#888',
                         'Sync timestamp: ' + getCurrentTimestamp() + '\nFrom domain: ' + trackedDomain);
                 });
